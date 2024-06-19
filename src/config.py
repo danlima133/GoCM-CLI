@@ -9,4 +9,9 @@ with open("cli.ini", "r") as configFile:
 for section in config.sections():
     data[section] = {}
     for option in config.options(section):
-        data[section][option] = config.get(section, option) 
+        data[section][option] = config.get(section, option)
+
+def formatToFlag(string, abbrv):
+    if abbrv:
+        return "-" + string
+    return "--" + string
