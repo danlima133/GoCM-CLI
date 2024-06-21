@@ -16,7 +16,7 @@ def main():
     parse.add_argument("token", nargs="?", default=config.data["tokens"]["default"], choices=config.data["tokens"].values(), help=config.data["helpers"]["tokens"])
     parse.add_argument("data", nargs="*", default="", help=config.data["helpers"]["data"])
 
-    parse.add_argument("--autocompile", "-aoutocm", action="store_true", help=config.data["flagsHelpers"]["flagcompile"])
+    parse.add_argument(config.data["flags"]["autocompile"], config.data["flags-abbrv"]["autocompile"], action="store_true", help=config.data["flagsHelpers"]["flagcompile"])
 
     args = parse.parse_args()
     parseArgs(args)
