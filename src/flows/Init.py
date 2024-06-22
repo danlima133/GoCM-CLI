@@ -7,4 +7,5 @@ class Init(InterfaceFlow):
         
     def start(self, args, metadata):
         print("initialize project")
+        print(args.test)
         return [code.FLOW_PASSED, "successfuly"]

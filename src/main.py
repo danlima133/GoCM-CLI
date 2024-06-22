@@ -14,8 +14,10 @@ def main():
     parse.add_argument("execute", choices=config.data["executes"].values(), help=config.data["helpers"]["execute"])
     parse.add_argument("token", nargs="?", default=config.data["tokens"]["default"], choices=config.data["tokens"].values(), help=config.data["helpers"]["tokens"])
     parse.add_argument("data", nargs="*", default="", help=config.data["helpers"]["data"])
-    
-    parse.add_argument(config.formatToFlag(config.data["flags"]["autocompile"], False), config.formatToFlag(config.data["flags-abbrv"]["autocompile"], True), action="store_true", help=config.data["flagsHelpers"]["flagcompile"])
+
+    for flagValue in config.data["flags"].values():
+        flagData = config.getFlagData(flagValue)
+        parse.add_argument(flagData["flag"]["flagDefault"], flagData["flag"]["flagAbbrv"], **flagData["attributes"])
 
     args = parse.parse_args()
 
