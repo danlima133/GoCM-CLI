@@ -1,10 +1,10 @@
-from parse import InterfaceParse
-import config
+from parse import InterfaceFlow
+import data as code
 
-class Init(InterfaceParse):
-    def __init__(self, args, parse):
-        super().__init__(args, parse)
+class Init(InterfaceFlow):
+    def __init__(self):
+        super().__init__()
         
-    def start(self):
-        if self.args.execute == config.data["executes"]["init"]:
-            print("initialize project")
+    def start(self, args, metadata):
+        print("initialize project")
+        return [code.FLOW_PASSED, "successfuly"]

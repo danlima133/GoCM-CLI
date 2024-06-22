@@ -1,0 +1,4 @@
+{
+    "init": ["flow1", {}],
+    "compile member": ["flow2", {}]
+}
