@@ -5,7 +5,10 @@ class InterfaceFlow:
         raise NotImplementedError("function no body")
 
 class Parse:
-    def __init__(self, flow:InterfaceFlow, parse, args, metadata):
-        exitData= flow.start(args, metadata)
-        if exitData[0] != data.FLOW_PASSED:
-            parse.error(exitData[1])
+    def __init__(self, flow:InterfaceFlow, args, metadata):
+        self.flow = flow
+        self.args = args
+        self.metadata = metadata
+    
+    def execute(self):
+        return self.flow.start(self.args, self.metadata)

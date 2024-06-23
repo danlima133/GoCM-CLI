@@ -1,7 +1,7 @@
 import argparse
 
-import config
 import data
+import mensage_error as erro
 
 from parse import Parse
 
@@ -9,28 +9,29 @@ parse:argparse.ArgumentParser
 
 def main():
     global parse
-    parse = argparse.ArgumentParser(description=config.data["helpers"]["description"])
+    parse = argparse.ArgumentParser(description=data.cli_data["helpers"]["description"])
 
-    parse.add_argument("execute", choices=config.data["executes"].values(), help=config.data["helpers"]["execute"])
-    parse.add_argument("token", nargs="?", default=config.data["tokens"]["default"], choices=config.data["tokens"].values(), help=config.data["helpers"]["tokens"])
-    parse.add_argument("data", nargs="*", default="", help=config.data["helpers"]["data"])
+    parse.add_argument("execute", choices=data.cli_data["executes"].values(), help=data.cli_data["helpers"]["execute"])
+    parse.add_argument("token", nargs="?", default=data.cli_data["tokens"]["default"], choices=data.cli_data["tokens"].values(), help=data.cli_data["helpers"]["tokens"])
+    parse.add_argument("data", nargs="*", default="", help=data.cli_data["helpers"]["data"])
 
-    for flagValue in config.data["flags"].values():
-        flagData = config.getFlagData(flagValue)
-        parse.add_argument(flagData["flag"]["flagDefault"], flagData["flag"]["flagAbbrv"], **flagData["attributes"])
+    for flag_value in data.cli_data["flags"].values():
+        flag_data = data.get_flag_data(flag_value)
+        parse.add_argument(flag_data["flag"]["flagDefault"], flag_data["flag"]["flagAbbrv"], **flag_data["attributes"])
 
     args = parse.parse_args()
 
-    index = data.getIndex(args.execute, args.token)
-    flowTable = data.getFlowTable()
-    flowData = flowTable.get(index, data.FLOW_NOT_FOUND)
+    flow_table = data.get_flow_table()
+    index = data.get_index(args.execute, args.token)
+    flow_data = flow_table.get(index, erro.mensages["err_data"]["code"])
     
-    if flowData == data.FLOW_NOT_FOUND:
-        parse.error("combination args failed")
-        quit()
+    if flow_data == erro.mensages["err_data"]["code"]:
+        parse.error(erro.mensages["err_data"]["msg"])
     
-    flow = data.FLOWS[flowData[0]]
-    Parse(flow, parse, args, flowData[1])
+    flow = data.FLOWS[flow_data[0]]
+    process = Parse(flow, args, flow_data[1])
+    err = process.execute()
+    print(f"exit code: {erro.mensages[err]['code']} = {erro.mensages[err]['msg']}")
 
 if __name__ == "__main__":
     main()

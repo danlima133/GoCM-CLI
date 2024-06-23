@@ -6,6 +6,8 @@ class Init(InterfaceFlow):
         super().__init__()
         
     def start(self, args, metadata):
+        if args.addon == True:
+            print("initialze project with dir addon")
+            return "err_ok"
         print("initialize project")
-        print(args.test)
-        return [code.FLOW_PASSED, "successfuly"]
+        return "err_ok"
