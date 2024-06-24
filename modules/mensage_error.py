@@ -1,4 +1,4 @@
-from data import FILES_EXTERNS
+from modules.data import FILES_EXTERNS
 
 mensages = {}
 

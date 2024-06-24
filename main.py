@@ -1,9 +1,7 @@
 import argparse
 
-import data
-import mensage_error as erro
-
-from parse import Parse
+from modules import data, mensage_error as erro
+from modules.parse import Parse
 
 parse:argparse.ArgumentParser
 

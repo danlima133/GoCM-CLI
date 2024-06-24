@@ -1,17 +1,17 @@
 import json
 import configparser
 
-from flows import Init, Compile
+from modules.flows import *
 
 FILES_EXTERNS = {
     "cli_config": "configs/cli.ini",
-    "cli_msg": "configs/msgs",
+    "cli_msg": "configs/mensages",
     "index_table": "configs/table.json" 
 }
 
 FLOWS = {
     "flow1": Init.Init(),
-    "flow2":  Compile.Compile()
+    "flow2": Compile.Compile()
 }
 
 parse_config = configparser.ConfigParser()

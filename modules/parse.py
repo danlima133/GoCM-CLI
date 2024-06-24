@@ -1,5 +1,3 @@
-import data
-
 class InterfaceFlow:
     def start(self, args, metadata):
         raise NotImplementedError("function no body")

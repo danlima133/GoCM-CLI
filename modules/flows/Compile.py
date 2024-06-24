@@ -1,4 +1,4 @@
-from parse import InterfaceFlow
+from modules.parse import InterfaceFlow
 
 class Compile(InterfaceFlow):
     def start(self, args, metedata):

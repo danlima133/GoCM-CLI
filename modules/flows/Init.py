@@ -1,5 +1,4 @@
-from parse import InterfaceFlow
-import data as code
+from modules.parse import InterfaceFlow
 
 class Init(InterfaceFlow):
     def __init__(self):
