@@ -1,10 +1,10 @@
-from modules.data import FILES_EXTERNS
+from modules.data import CONFIGS_PATHS
 
 mensages = {}
 
 def get_msgs():
     mensages_object = {}
-    with open(FILES_EXTERNS["cli_msg"], "r") as file:
+    with open(CONFIGS_PATHS["cli_msg"], "r") as file:
         content = file.read()
         mensages = content.splitlines()
         for msg in mensages:

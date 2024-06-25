@@ -1,7 +1,7 @@
 import argparse
 
+import data.DataFlow as structure
 from modules import data, mensage_error as erro
-from modules.parse import Parse
 
 parse:argparse.ArgumentParser
 
@@ -18,17 +18,28 @@ def main():
         parse.add_argument(flag_data["flag"]["flagDefault"], flag_data["flag"]["flagAbbrv"], **flag_data["attributes"])
 
     args = parse.parse_args()
+    
+    metadata = {}
+    kwargs = args._get_kwargs()
+    flags_passed = kwargs[3::]
+    for flag in flags_passed:
+        metadata[flag[0]] = flag[1]
 
     flow_table = data.get_flow_table()
     index = data.get_index(args.execute, args.token)
     flow_data = flow_table.get(index, erro.mensages["err_data"]["code"])
-    
+    flow_args = {}
+    try:
+        flow_args = flow_data[1]
+    except Exception:
+        flow_args = {}
+
     if flow_data == erro.mensages["err_data"]["code"]:
         parse.error(erro.mensages["err_data"]["msg"])
     
-    flow = data.FLOWS[flow_data[0]]
-    process = Parse(flow, args, flow_data[1])
-    err = process.execute()
+    flow_metadata = structure.FlowData(flags=metadata, args=flow_args)
+    flow = data.FLOWS[flow_data[0]]()
+    err = flow.execute(flow_metadata)
     print(f"exit code: {erro.mensages[err]['code']} = {erro.mensages[err]['msg']}")
 
 if __name__ == "__main__":

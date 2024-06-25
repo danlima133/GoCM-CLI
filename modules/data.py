@@ -1,17 +1,16 @@
 import json
 import configparser
 
-from modules.flows import *
+from flows import *
 
-FILES_EXTERNS = {
+CONFIGS_PATHS = {
     "cli_config": "configs/cli.ini",
     "cli_msg": "configs/mensages",
     "index_table": "configs/table.json" 
 }
 
 FLOWS = {
-    "flow1": Init.Init(),
-    "flow2": Compile.Compile()
+    "InitProject": InitProject.InitProject
 }
 
 parse_config = configparser.ConfigParser()
@@ -19,7 +18,7 @@ cli_data = {}
 
 def get_cli_data() -> dict:
     data = {}
-    with open(FILES_EXTERNS["cli_config"], "r") as config_file:
+    with open(CONFIGS_PATHS["cli_config"], "r") as config_file:
         parse_config.read_file(config_file)
 
     for section in parse_config.sections():
@@ -31,7 +30,7 @@ def get_cli_data() -> dict:
 cli_data = get_cli_data()
 
 def get_flow_table() -> dict:
-    with open(FILES_EXTERNS["index_table"], "r") as file:
+    with open(CONFIGS_PATHS["index_table"], "r") as file:
         content = file.read()
         table = json.loads(content)
         return table
