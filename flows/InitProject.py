@@ -8,7 +8,7 @@ class InitProject(interface.InterfaceFlow):
         flag_data = metadata.flags["addon"]
         flag_include = metadata.flags["include"]
         
-        if flag_include is list:
+        if flag_include != None:
             for file in flag_include:
                 if file in includes:
                     print(f"include: {file}")

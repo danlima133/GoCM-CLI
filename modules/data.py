@@ -10,7 +10,8 @@ CONFIGS_PATHS = {
 }
 
 FLOWS = {
-    "InitProject": InitProject.InitProject
+    "InitProject": InitProject.InitProject,
+    "UpgradeProject": UpgradeProject.UpgradeProject
 }
 
 parse_config = configparser.ConfigParser()

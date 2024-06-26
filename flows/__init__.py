@@ -1,1 +1,1 @@
-__all__ = ["InitProject"]
+__all__ = ["InitProject", "UpgradeProject"]

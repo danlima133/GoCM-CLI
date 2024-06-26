@@ -1,3 +1,4 @@
 {
-    "init": ["InitProject"]
+    "init": ["InitProject"],
+    "upgrade": ["UpgradeProject"]
 }
