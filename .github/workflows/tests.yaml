@@ -23,7 +23,7 @@ jobs:
             
             - name: Install dependency
               run: |
-                python pip install -r requirements.txt
+                pip install -r requirements.txt
             
             - name: Execute tests
               run: |
