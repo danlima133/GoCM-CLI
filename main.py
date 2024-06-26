@@ -27,17 +27,17 @@ def main():
 
     flow_table = data.get_flow_table()
     index = data.get_index(args.execute, args.token)
-    flow_data = flow_table.get(index, erro.mensages["err_data"]["code"])
+    flow_data = flow_table.get(index, erro.mensages["err_command"]["code"])
     flow_args = {}
     try:
         flow_args = flow_data[1]
     except Exception:
         flow_args = {}
 
-    if flow_data == erro.mensages["err_data"]["code"]:
-        parse.error(erro.mensages["err_data"]["msg"])
+    if flow_data == erro.mensages["err_command"]["code"]:
+        parse.error(erro.mensages["err_command"]["msg"])
     
-    flow_metadata = structure.FlowData(flags=metadata, args=flow_args)
+    flow_metadata = structure.FlowData(flags=metadata, args=flow_args, data=args.data)
     flow = data.FLOWS[flow_data[0]]()
     err = flow.execute(flow_metadata)
     print(f"exit code: {erro.mensages[err]['code']} = {erro.mensages[err]['msg']}")
