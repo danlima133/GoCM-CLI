@@ -1,8 +1,9 @@
 from interfaces import InterfaceFlow
 from data.DataFlow import FlowData
 from modules.console import console
+from modules.cli import *
 
-class Flags(InterfaceFlow.InterfaceFlow):
+class Defeault(InterfaceFlow.InterfaceFlow):
     def execute(self, metadata:FlowData):
         if metadata.flags["version"] == True:
             console().print("State: [purple]developement[/purple]")
@@ -12,4 +13,4 @@ class Flags(InterfaceFlow.InterfaceFlow):
         return "err_ok"
     
     def __str__(self):
-        return "Flags"
+        return "Defeault"
