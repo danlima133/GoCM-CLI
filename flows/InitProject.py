@@ -5,6 +5,7 @@ class InitProject(interface.InterfaceFlow):
     def execute(self, metadata:structure.FlowData):
         includes = ["aaa", "bbb", "ccc"]
 
+        print(metadata.flags)
         flag_data = metadata.flags["addon"]
         flag_include = metadata.flags["include"]
         

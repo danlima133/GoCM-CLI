@@ -21,9 +21,9 @@ def main():
     
     metadata = {}
     kwargs = args._get_kwargs()
-    flags_passed = kwargs[3::]
-    for flag in flags_passed:
-        metadata[flag[0]] = flag[1]
+    kwargs.remove(('execute', args.execute))
+    kwargs.remove(('token', args.token))
+    kwargs.remove(('data', args.data))
 
     flow_table = data.get_flow_table()
     index = data.get_index(args.execute, args.token)
