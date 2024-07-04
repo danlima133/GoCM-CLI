@@ -45,6 +45,7 @@ def main():
 
     args = parse.parse_args()
     
+<<<<<<< HEAD
     metadata = get_metedata()
     flow_data, flow_args = get_flow_data_by_table()
     
@@ -52,6 +53,25 @@ def main():
         if args.addon == False and args.version == False:
             parse.error(erro.mensages["err_command"]["msg"])
             return "err_command"
+=======
+    metadata = {}
+    kwargs = args._get_kwargs()
+    kwargs.remove(('execute', args.execute))
+    kwargs.remove(('token', args.token))
+    kwargs.remove(('data', args.data))
+
+    flow_table = data.get_flow_table()
+    index = data.get_index(args.execute, args.token)
+    flow_data = flow_table.get(index, erro.mensages["err_command"]["code"])
+    flow_args = {}
+    try:
+        flow_args = flow_data[1]
+    except Exception:
+        flow_args = {}
+
+    if flow_data == erro.mensages["err_command"]["code"]:
+        parse.error(erro.mensages["err_command"]["msg"])
+>>>>>>> f12f11c1a593a5d38f0584762ec5f5b8054a9785
     
     flow_metadata = structure.FlowData(flags=metadata, args=flow_args, data=args.data)
     flow = data.FLOWS[flow_data[0]]()

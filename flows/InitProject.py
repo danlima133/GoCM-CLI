@@ -6,8 +6,14 @@ class InitProject(interface.InterfaceFlow):
     def execute(self, metadata:structure.FlowData):
         includes = ["aaa", "bbb", "ccc"]
 
+<<<<<<< HEAD
         flag_data = metadata.flags.get("addon", None)
         flag_include = metadata.flags.get("include", None)
+=======
+        print(metadata.flags)
+        flag_data = metadata.flags["addon"]
+        flag_include = metadata.flags["include"]
+>>>>>>> f12f11c1a593a5d38f0584762ec5f5b8054a9785
         
         if flag_include != None:
             for file in flag_include:
