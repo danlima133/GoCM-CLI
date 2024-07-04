@@ -18,7 +18,7 @@ def get_metedata() -> dict:
         metadata[flag[0]] = flag[1]
     return metadata
 
-def get_flow_data_by_table() -> list | dict:
+def get_flow_data_by_table():
     flow_table = data.get_flow_table()
     index = data.get_index(args.execute, args.token)
     flow_data = flow_table.get(index, erro.mensages["err_not_found"]["code"])
@@ -42,23 +42,16 @@ def main():
     for flag_value in data.cli_data["flags"].values():
         flag_data = data.get_flag_data(flag_value)
         parse.add_argument(flag_data["flag"]["flagDefault"], flag_data["flag"]["flagAbbrv"], **flag_data["attributes"])
-
+    
     args = parse.parse_args()
-    
-<<<<<<< HEAD
-    metadata = get_metedata()
-    flow_data, flow_args = get_flow_data_by_table()
-    
-    if flow_data == "39":
-        if args.addon == False and args.version == False:
-            parse.error(erro.mensages["err_command"]["msg"])
-            return "err_command"
-=======
+
     metadata = {}
     kwargs = args._get_kwargs()
     kwargs.remove(('execute', args.execute))
     kwargs.remove(('token', args.token))
     kwargs.remove(('data', args.data))
+    for kwarg in kwargs:
+        metadata[kwarg[0]] = kwarg[1]
 
     flow_table = data.get_flow_table()
     index = data.get_index(args.execute, args.token)
@@ -68,10 +61,12 @@ def main():
         flow_args = flow_data[1]
     except Exception:
         flow_args = {}
-
-    if flow_data == erro.mensages["err_command"]["code"]:
-        parse.error(erro.mensages["err_command"]["msg"])
->>>>>>> f12f11c1a593a5d38f0584762ec5f5b8054a9785
+    
+    try:
+        if flow_data == erro.mensages["err_command"]["code"]:
+            parse.error(erro.mensages["err_command"]["msg"])
+    except Exception:
+        return erro.mensages["err_command"]["msg"]
     
     flow_metadata = structure.FlowData(flags=metadata, args=flow_args, data=args.data)
     flow = data.FLOWS[flow_data[0]]()

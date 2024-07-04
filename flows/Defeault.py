@@ -8,9 +8,11 @@ class Defeault(InterfaceFlow.InterfaceFlow):
         if metadata.flags["version"] == True:
             console().print("State: [purple]developement[/purple]")
             console().print("[green]v0.0.0[/green]")
+            return "err_ok"
         elif metadata.flags["help"] == True:
             console().print("[red]HELP[/red]")
-        return "err_ok"
+            return "err_ok"
+        return "err_defeault"
     
     def __str__(self):
         return "Defeault"
