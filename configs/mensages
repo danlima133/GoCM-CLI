@@ -1,4 +1,8 @@
-ok=execute with successfuly::0
-data_invalid=data invalid::55
-data_exist=data not exist::44
-command=commad not exist::23
+ok=execute with successfuly->0
+
+data_invalid=data invalid->55
+data_exist=data not exist->44
+
+text_format=formatation invalid->89
+
+command=commad not exist->23

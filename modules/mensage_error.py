@@ -8,8 +8,9 @@ def get_msgs():
         content = file.read()
         mensages = content.splitlines()
         for msg in mensages:
+            if msg == "": continue
             data = msg.split("=")
-            msgcode = data[1].split("::")
+            msgcode = data[1].split("->")
             mensages_object["err_" + data[0]] = { "msg": msgcode[0], "code": msgcode[1] }
         file.close()
     return mensages_object    
