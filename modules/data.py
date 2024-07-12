@@ -2,6 +2,7 @@ import json
 import configparser
 
 from flows import *
+from modules.cache import Cache
 
 CONFIGS_PATHS = {
     "cli_config": "configs/cli.ini",
@@ -11,14 +12,22 @@ CONFIGS_PATHS = {
 
 FLOWS = {
     "InitProject": InitProject.InitProject,
-    "UpgradeProject": UpgradeProject.UpgradeProject
+    "UpgradeProject": UpgradeProject.UpgradeProject,
+    "Defeault": Defeault.Defeault
 }
 
 parse_config = configparser.ConfigParser()
-cli_data = {}
+
+cache = Cache()
 
 def get_cli_data() -> dict:
+    global cache
+    
+    if cache.get("cli_data") != None:
+        return cache.get("cli_data")
+    
     data = {}
+    
     with open(CONFIGS_PATHS["cli_config"], "r") as config_file:
         parse_config.read_file(config_file)
 
@@ -26,9 +35,34 @@ def get_cli_data() -> dict:
         data[section] = {}
         for option in parse_config.options(section):
             data[section][option] = parse_config.get(section, option)
+    
+    cache.set("cli_data", data)
+    
     return data
 
-cli_data = get_cli_data()
+def get_mensages():
+    global cache
+
+    if cache.get("mensages") != None:
+        return cache.get("mensages")
+
+    mensages_object = {}
+    
+    with open(CONFIGS_PATHS["cli_msg"], "r") as file:
+        content = file.read()
+        mensages = content.splitlines()
+        
+        for msg in mensages:
+        
+            if msg == "": continue
+        
+            data = msg.split("=")
+            msgcode = data[1].split("->")
+            mensages_object["err_" + data[0]] = { "msg": msgcode[0], "code": msgcode[1] }
+        
+    cache.set("mensages", mensages_object)
+    
+    return mensages_object
 
 def get_flow_table() -> dict:
     with open(CONFIGS_PATHS["index_table"], "r") as file:
@@ -37,12 +71,13 @@ def get_flow_table() -> dict:
         return table
 
 def get_index(execute, token):
-    if token == cli_data["tokens"]["default"]:
+    if execute == get_cli_data()["executes"]["defeault"]:
+        return "defeault"
+    elif execute != get_cli_data()["executes"]["defeault"] and token == get_cli_data()["tokens"]["defeault"]:
         return execute
-    return execute + " " + token
+    return f"{execute} {token}"
 
 def get_flag_data(value:str) -> dict:
-    global cli_data
     
     flag_data = value.split("?", 1)
     
@@ -63,7 +98,7 @@ def get_flag_data(value:str) -> dict:
         str_hash = attributes_object[attr[0]][1:len(attributes_object[attr[0]])-1]
 
         if str_start == "!" and str_end == "!":
-            attributes_object[attr[0]] = cli_data["flagshelpers"].get(str_hash, "erro: missing hash")
+            attributes_object[attr[0]] = get_cli_data()["flagshelpers"].get(str_hash, "erro: missing hash")
         
         if attr[0] == "choices":
             attributes_object[attr[0]] = json.loads(attr[1])
