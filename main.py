@@ -42,8 +42,20 @@ def main():
 
     args = parse.parse_args()
     
-    metadata = get_metedata()
-    flow_data, flow_args = get_flow_data_by_table()
+    metadata = {}
+    kwargs = args._get_kwargs()
+    kwargs.remove(('execute', args.execute))
+    kwargs.remove(('token', args.token))
+    kwargs.remove(('data', args.data))
+
+    flow_table = data.get_flow_table()
+    index = data.get_index(args.execute, args.token)
+    flow_data = flow_table.get(index, erro.mensages["err_command"]["code"])
+    flow_args = {}
+    try:
+        flow_args = flow_data[1]
+    except Exception:
+        flow_args = {}
 
     if flow_data == erro.mensages["err_command"]["code"]:
         parse.error(erro.mensages["err_command"]["msg"])
