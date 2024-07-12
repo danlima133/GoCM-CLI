@@ -1,7 +1,6 @@
 from sys import exit
 
-from argparse import ArgumentParser, Namespace
-
+from argparse import ArgumentParser
 from modules.console import console
 
 class CLIArgumentParser(ArgumentParser):
