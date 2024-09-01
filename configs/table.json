@@ -1,4 +1,5 @@
 {
     "init": ["InitProject"],
-    "upgrade version": ["UpgradeProject"]
+    "upgrade version": ["UpgradeProject"],
+    "default": ["Flags"]
 }

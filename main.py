@@ -30,9 +30,9 @@ def main():
     global parse
     global args
     
-    parse = ArgumentParser(description=data.cli_data["helpers"]["description"])
+    parse = ArgumentParser(description=data.cli_data["helpers"]["description"], add_help=False)
 
-    parse.add_argument("execute", choices=data.cli_data["executes"].values(), help=data.cli_data["helpers"]["execute"])
+    parse.add_argument("execute", nargs="?", default="null", choices=data.cli_data["executes"].values(), help=data.cli_data["helpers"]["execute"])
     parse.add_argument("token", nargs="?", default=data.cli_data["tokens"]["default"], choices=data.cli_data["tokens"].values(), help=data.cli_data["helpers"]["tokens"])
     parse.add_argument("data", nargs="*", default="", help=data.cli_data["helpers"]["data"])
 
