@@ -1,2 +1,5 @@
 .vscode
-GoCM-CLI
+data/__pycache__
+flows/__pycache__
+interfaces/__pycache__
+modules/__pycache__

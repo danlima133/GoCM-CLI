@@ -5,7 +5,7 @@ from modules.console import console
 class InitProject(interface.InterfaceFlow):
     def execute(self, metadata:structure.FlowData):
         includes = ["aaa", "bbb", "ccc"]
-
+        
         flag_data = metadata.flags.get("addon", None)
         flag_include = metadata.flags.get("include", None)
         

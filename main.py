@@ -42,8 +42,23 @@ def main():
     for flag_value in data.cli_data["flags"].values():
         flag_data = data.get_flag_data(flag_value)
         parse.add_argument(flag_data["flag"]["flagDefault"], flag_data["flag"]["flagAbbrv"], **flag_data["attributes"])
-    
+
     args = parse.parse_args()
+    
+    metadata = {}
+    kwargs = args._get_kwargs()
+    kwargs.remove(('execute', args.execute))
+    kwargs.remove(('token', args.token))
+    kwargs.remove(('data', args.data))
+
+    flow_table = data.get_flow_table()
+    index = data.get_index(args.execute, args.token)
+    flow_data = flow_table.get(index, erro.mensages["err_command"]["code"])
+    flow_args = {}
+    try:
+        flow_args = flow_data[1]
+    except Exception:
+        flow_args = {}
 
     metadata = {}
     kwargs = args._get_kwargs()
