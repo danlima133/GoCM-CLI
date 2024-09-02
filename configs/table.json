@@ -1,5 +1,5 @@
 {
     "init": ["InitProject"],
     "upgrade version": ["UpgradeProject"],
-    "default": ["Flags"]
+    "defeault": ["Defeault"]
 }
