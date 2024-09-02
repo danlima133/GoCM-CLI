@@ -10,9 +10,8 @@ CONFIGS_PATHS = {
 }
 
 FLOWS = {
-    "InitProject": InitProject.InitProject,
-    "UpgradeProject": UpgradeProject.UpgradeProject,
-    "Defeault": Defeault.Defeault
+    "Defeault": Defeault.Defeault,
+    "Template": Template.Template
 }
 
 parse_config = configparser.ConfigParser()

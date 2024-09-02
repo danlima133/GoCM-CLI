@@ -1,4 +1,5 @@
 .vscode
+register.json
 data/__pycache__
 flows/__pycache__
 interfaces/__pycache__
