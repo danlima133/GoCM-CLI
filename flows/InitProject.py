@@ -1,23 +1,28 @@
 from interfaces import InterfaceFlow as interface
 from data import DataFlow as structure
+from modules.console import console
 
 class InitProject(interface.InterfaceFlow):
     def execute(self, metadata:structure.FlowData):
         includes = ["aaa", "bbb", "ccc"]
-
-        print(metadata.flags)
-        flag_data = metadata.flags["addon"]
-        flag_include = metadata.flags["include"]
+        
+        flag_data = metadata.flags.get("addon", None)
+        flag_include = metadata.flags.get("include", None)
         
         if flag_include != None:
             for file in flag_include:
                 if file in includes:
-                    print(f"include: {file}")
+                    console().print(f":heavy_plus_sign: -> :file_folder: [green]{file}[/green]")
                 else:
-                    print(f"file can not include: {file}")
+                    console().print(f":heavy_minus_sign: -> :file_folder: [red]{file}[/red]")
 
         if flag_data:
-            print("project created with dir addon")
+            console().print(":file_folder: Project created")
+            console().print(":heavy_plus_sign: -> :file_folder: [green]Addon[/green]")
             return "err_ok"
-        print("project created")
+        console().print(":file_folder: Project created")
+        console().print(":heavy_minus_sign: -> :file_folder: [red]Addon[/red]")
         return "err_ok"
+    
+    def __str__(self):
+        return "Init Project"

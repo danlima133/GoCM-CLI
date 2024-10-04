@@ -11,7 +11,8 @@ CONFIGS_PATHS = {
 
 FLOWS = {
     "InitProject": InitProject.InitProject,
-    "UpgradeProject": UpgradeProject.UpgradeProject
+    "UpgradeProject": UpgradeProject.UpgradeProject,
+    "Defeault": Defeault.Defeault
 }
 
 parse_config = configparser.ConfigParser()
@@ -37,9 +38,11 @@ def get_flow_table() -> dict:
         return table
 
 def get_index(execute, token):
-    if token == cli_data["tokens"]["default"]:
+    if execute == cli_data["executes"]["defeault"]:
+        return "defeault"
+    elif execute != cli_data["executes"]["defeault"] and token == cli_data["tokens"]["defeault"]:
         return execute
-    return execute + " " + token
+    return f"{execute} {token}"
 
 def get_flag_data(value:str) -> dict:
     global cli_data
