@@ -10,8 +10,7 @@ CONFIGS_PATHS = {
 }
 
 FLOWS = {
-    "Defeault": Defeault.Defeault,
-    "Template": Template.Template
+    "Defeault": Defeault.Defeault
 }
 
 parse_config = configparser.ConfigParser()

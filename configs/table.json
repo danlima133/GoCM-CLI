@@ -1,7 +1,3 @@
 {
-    "defeault": ["Defeault"],
-    "template create": ["Template", {"action": "create"}],
-    "template apply": ["Template", {"action": "apply"}],
-    "template remove": ["Template", {"action": "remove"}],
-    "template list": ["Template", {"action": "list"}]
+    "defeault": ["Defeault"]
 }

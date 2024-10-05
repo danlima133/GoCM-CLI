@@ -1,1 +1,1 @@
-__all__ = ["Defeault", "Template"]
+__all__ = ["Defeault"]

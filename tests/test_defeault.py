@@ -1,10 +1,10 @@
-from unittest import TestCase
+import unittest
 from modules.console import console
 
 from flows import Defeault
 from data import DataFlow
 
-class TestDefeault(TestCase):
+class TestDefeault(unittest.TestCase):
     def test_input_invalid(self):
         console().rule("Test Defeault - No Flags")
         flow = Defeault.Defeault()
@@ -57,3 +57,6 @@ class TestDefeault(TestCase):
             console().log("Flag = [red]register[/red]")
             console().log(flow_data.flags)
         self.assertEqual(err, "err_ok")
+
+if __name__ == "__main__":
+    unittest.main()
